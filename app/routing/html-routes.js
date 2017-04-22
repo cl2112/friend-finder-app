@@ -9,7 +9,17 @@ const bodyParser = require("body-parser");
 const path = require("path");
 
 const app = express();
-app.use(express.static("./app"));
+
+// Sets up the Express app to handle data parsing
+// express app handling data parsing
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.text());
+app.use(bodyParser.json({ type: "application/vnd.api+json" }));
+//====================================================================================
+
+
+// app.use(express.static("./app"));
 
 
 

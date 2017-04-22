@@ -8,11 +8,32 @@
 const express = require("express");
 const router = express.Router();
 const bodyParser = require("body-parser");
+
 const app = express();
-app.use(express.static("./app"));
+// Sets up the Express app to handle data parsing
+// express app handling data parsing
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.text());
+app.use(bodyParser.json({ type: "application/vnd.api+json" }));
+//====================================================================================
+
+
+
+
+// app.use(express.static("./app"));
+const friendArray = require("./friend-array.js");
+
+
+function friend(name, pic, answersArray){
+	this.name = name;
+	this.pic = pic;
+	this.answers = answersArray;
+};
+
 
 router.get("/api/friends", function(req, res){
-	res.json()
+	res.json(friendArray);
 });
 
 router.post("api/friends", function(req, res){
@@ -23,6 +44,10 @@ router.post("api/friends", function(req, res){
 	console.log("data recieved");
 
 	console.log(name, pic, answers);
+
+	var friend = new friend(name, pic, answers);
+
+	friendArray.push(friend);
 });
 
 module.exports = router;
