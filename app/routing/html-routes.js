@@ -11,15 +11,21 @@ const path = require("path");
 const app = express();
 app.use(express.static("./app"));
 
+
+
+
+
+router.get("/survey.html", function(req, res){
+	res.sendFile(path.join(__dirname, "../public/survey.html"));
+});
+
+
+
 router.use("/",function(req, res){
 	res.sendFile(path.join(__dirname, "../public/home.html"));
 });
 
 
-
-router.get("/survey", function(req, res){
-	res.sendFile("survey.html");
-});
 
 module.exports = router;
 
