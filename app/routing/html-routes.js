@@ -3,18 +3,23 @@
 // A GET Route to /survey which should display the survey page.
 // A default USE route that leads to home.html which displays the home page.
 
+const express = require("express");
+const router = express.Router();
+const bodyParser = require("body-parser");
+const path = require("path");
 
+const app = express();
+app.use(express.static("./app"));
 
-
-app.use("/", function(req, res){
-	res.sendFile("home.html");
+router.use("/",function(req, res){
+	res.sendFile(path.join(__dirname, "../public/home.html"));
 });
 
 
 
-app.get("/survey", function(req, res){
+router.get("/survey", function(req, res){
 	res.sendFile("survey.html");
 });
 
-
+module.exports = router;
 

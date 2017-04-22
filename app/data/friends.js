@@ -11,7 +11,7 @@ $(document).on("click", "#submitSurvey", function(){
 	};
 	
 
-	$.post("/app/friends",
+	$.post("/api/friends",
 	{
 		name: "" + name,
 		pic: "" + pic,

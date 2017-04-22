@@ -5,6 +5,9 @@ const bodyParser = require("body-parser");
 const path = ("path");
 //===================================================================================
 
+const apiRoutes = require("./app/routing/api-routes.js");
+const htmlRoutes = require("./app/routing/html-routes.js");
+
 
 
 // Express App set up
@@ -21,15 +24,20 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 //====================================================================================
 
 
-// The Friend Array
-//-----------------------------------------------------------------------------------
-var friendArray = [];
-//===================================================================================
+// // The Friend Array
+// //-----------------------------------------------------------------------------------
+// var friendArray = [];
+// //===================================================================================
 
 
-app.get("/", function(req, res){
-	res.send("hello1");
-});
+app.use("/", htmlRoutes);
+
+app.use("/api", apiRoutes);
+
+
+// app.get("/", function(req, res){
+// 	res.send("hello1");
+// });
 
 
 
