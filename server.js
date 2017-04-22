@@ -10,7 +10,7 @@ const path = ("path");
 // Express App set up
 //-----------------------------------------------------------------------------------
 var app = express();
-var PORT = 2112;
+var PORT = process.env.PORT || 2112;
 
 // Sets up the Express app to handle data parsing
 // express app handling data parsing
@@ -19,6 +19,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 //====================================================================================
+
+
+// The Friend Array
+//-----------------------------------------------------------------------------------
+var friendArray = [];
+//===================================================================================
 
 
 app.get("/", function(req, res){
