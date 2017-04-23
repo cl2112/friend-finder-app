@@ -28,10 +28,11 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 var friendsArray = [];
 
-function friend(name, pic, answersArray){
+function friend(name, pic, answersArray, friendNumber){
 	this.name = name;
 	this.pic = pic;
 	this.answers = answersArray;
+	this.friendNumber = friendNumber;
 };
 
 
@@ -44,14 +45,40 @@ app.post("/api/friends", function(req,res){
 	var name = req.body.name;
 	var pic = req.body.pic;
 	var answers = req.body.answers;
+	var friendNumber = 0;
 
-	var friendObj = new friend(name, pic, answers);
+	for (var i = 0; i < answers.length; i++){
+		friendNumber += parseInt(answers[i]);
+	}	
+
+	var friendObj = new friend(name, pic, answers, friendNumber);
 
 	friendsArray.push(friendObj);
 
 	console.log(friendsArray);
 	console.log("New friend entered");
 
+	var newFriendIndex = 0;
+	var friendDifference = 0;
+	
+	for (var i = 0; i < friendsArray.length; i++){
+		var newFriendNumber = friendsArray[i];
+		
+		var newFriendDifference = friendNumber - newFriendNumber
+
+		if (newFriendDifference < 0){
+			newFriendDifference *= -1;
+		}
+
+		if (newFriendDifference < friendDifference){
+			newFriendIndex = i;
+			friendDifference = newFriendDifference;
+		}
+
+		console.log("best Match = " + friendsArray[newFriendIndex].name);
+
+		
+	}
 });
 
 app.get("/api/friends", function(req,res){
